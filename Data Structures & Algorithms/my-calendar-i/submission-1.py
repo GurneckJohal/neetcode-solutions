@@ -1,0 +1,26 @@
+class MyCalendar:
+    
+    def __init__(self):
+        self.bookings = []
+
+    def book(self, startTime: int, endTime: int) -> bool:
+        if not startTime < endTime: return False
+        has_conflict = False
+        for booking in self.bookings:
+            if booking[0] <= startTime < booking[1]:
+                return False
+            elif booking[0] < endTime <= booking[1]:
+                return False
+            elif startTime <= booking[0] < endTime:
+                return False
+            elif startTime < booking[1] <= endTime:
+                return False
+            else:
+                continue
+        self.bookings.append([startTime, endTime])
+        return True
+
+
+# Your MyCalendar object will be instantiated and called as such:
+# obj = MyCalendar()
+# param_1 = obj.book(startTime,endTime)
